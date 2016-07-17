@@ -16,18 +16,23 @@ $ nw_leafnames.py -h
 usage: 
   nw_leafnames.py [OPTIONS] TREE > new_names.tree
 
-Rename external nodes (leaves) in Newick tree
+Rename or display external node names (leaves) in Newick tree file
+If list of new names is not specified, output will use existing names
+
+Output formats :
+	newick : newick format
+	  tree : show tree topology
+	  list : print list of leaf names
 
 positional arguments:
-  TREE        original tree file in Newick format
+  TREE             original tree file in Newick format
 
 optional arguments:
-  -h, --help  show this help message and exit
-  --tab TAB   specify tab-separated file with [oldnames] [newnames]
-  --csv CSV   specify CSV file with [oldnames],[newnames]
-  --show      show tree with new leaf names
-  --list      print list of leaf names in tree order
-  --version   show program's version number and exit
+  -h, --help       show this help message and exit
+  --tab TAB        specify tab-separated file with [oldnames] [newnames]
+  --csv CSV        specify CSV file with [oldnames],[newnames]
+  --output FORMAT  newick (default) | tree | list
+  --version        show program's version number and exit
 ```
 
 ##Bugs
