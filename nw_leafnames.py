@@ -18,17 +18,21 @@ def tab2dict(tab, sep):
 
 parser = argparse.ArgumentParser(
     formatter_class=RawTextHelpFormatter,
-    description='Rename external nodes (leaves) in Newick tree\n',
+    description='Rename or display external node names (leaves) in Newick tree file\n'
+		'If list of new names is not specified, output will use existing names\n'
+		'\nOutput formats :\n'
+		'\tnewick : newick format\n'
+		'\t  tree : show tree topology\n'
+		'\t  list : print list of leaf names\n',
     usage='\n  %(prog)s [OPTIONS] TREE > new_names.tree')
 parser.add_argument('tree', metavar='TREE', nargs=1, help='original tree file in Newick format')
-parser.add_argument('--tab', metavar='TAB', help='specify tab-separated file with [oldnames] [newnames]')
-parser.add_argument('--csv', metavar='CSV', help='specify CSV file with [oldnames],[newnames]')
-parser.add_argument('--show', action='store_true', help='show tree with new leaf names')
-parser.add_argument('--list', action='store_true', help='print list of leaf names in tree order')
+parser.add_argument('--tab', metavar='TAB', nargs=1, help='specify tab-separated file with [oldnames] [newnames]')
+parser.add_argument('--csv', metavar='CSV', nargs=1, help='specify CSV file with [oldnames],[newnames]')
+parser.add_argument('--output', metavar='FORMAT', nargs=1, help='newick (default) | tree | list')
 parser.add_argument('--version', action='version', version=
     '=====================================\n'
     '%(prog)s v0.1\n'
-    'Updated 7-Jul-2016 by Jason Kwong\n'
+    'Updated 17-Jul-2016 by Jason Kwong\n'
     'Dependencies: ete2, csv\n'
     '=====================================')
 args = parser.parse_args()
@@ -36,29 +40,23 @@ args = parser.parse_args()
 # Load tree
 t = Tree(args.tree[0])
 
-# Set delimiter options
-if args.tab:
-    tab = args.tab
-    sep = '\t'
-elif args.csv:
-    tab = args.csv
-    sep = ','
-else:
-    if args.list:
-        for leaf in t.iter_leaves():
-            print(leaf.name)
-    else:
-        print(t.write(format=1))
-    sys.exit(0)
-
-# Setup dictionary of oldnames, newnames
-new_names = tab2dict(tab, sep)
-
 # Rename leaf nodes
-for leaf in t.iter_leaves():
-    leaf.name = new_names[leaf.name]
-if args.show:
-    print(t)
+if args.tab:
+	new_names = tab2dict(args.tab[0], '\t')
+	for leaf in t.iter_leaves():
+	    leaf.name = new_names[leaf.name]
+elif args.csv:
+	new_names = tab2dict(args.csv[0], ',')
+	for leaf in t.iter_leaves():
+	    leaf.name = new_names[leaf.name]
+
+# Print output to stdout
+if args.output[0] == 'list':
+	for leaf in t.iter_leaves():
+		print(leaf.name)
+elif args.output[0] == 'tree':
+	print(t)
 else:
-    print(t.write(format=1))
+	print(t.write(format=1))
+
 sys.exit(0)
