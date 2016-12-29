@@ -28,7 +28,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('tree', metavar='TREE', nargs=1, help='original tree file in Newick format')
 parser.add_argument('--tab', metavar='TAB', nargs=1, help='specify tab-separated file with [oldnames] [newnames]')
 parser.add_argument('--csv', metavar='CSV', nargs=1, help='specify CSV file with [oldnames],[newnames]')
-parser.add_argument('--output', metavar='FORMAT', nargs=1, help='newick (default) | tree | list')
+parser.add_argument('--output', metavar='FORMAT', default='newick', nargs=1, help='newick (default) | tree | list')
 parser.add_argument('--version', action='version', version=
     '=====================================\n'
     '%(prog)s v0.1\n'
