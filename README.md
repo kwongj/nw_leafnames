@@ -7,7 +7,7 @@ Jason Kwong (@kwongjc)
 
 ## Dependencies
 * Python 2.7.x
-* ete2 - `$ pip2 install ete2`
+* ete2 - `pip install ete2`
 
 ## Usage
 
