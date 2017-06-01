@@ -1,15 +1,15 @@
 # nw_leafnames
 Rename or list external nodes (leaves) in a newick tree
 
-##Author
+## Author
 
 Jason Kwong (@kwongjc)
 
-##Dependencies
+## Dependencies
 * Python 2.7.x
-* ete2
+* ete2 - `$ pip2 install ete2`
 
-##Usage
+## Usage
 
 ```
 $ nw_leafnames.py -h
@@ -35,10 +35,10 @@ optional arguments:
   --version        show program's version number and exit
 ```
 
-##Bugs
+## Bugs
 
 Please submit via the [GitHub issues page](https://github.com/kwongj/nw_leafnames/issues).  
 
-##Software Licence
+## Software Licence
 
 [GPLv3](https://github.com/kwongj/nw_leafnames/blob/master/LICENSE)
